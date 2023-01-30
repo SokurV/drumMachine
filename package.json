@@ -24,6 +24,9 @@
     "url": "https://github.com/SokurV/drumMachine/issues"
   },
   "homepage": "https://github.com/SokurV/drumMachine#readme",
+  "browserslist": [
+    "last 3 versions, not dead, > 0.2%"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.6",
@@ -45,10 +48,8 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "bootstrap": "^5.2.2",
-    "marked": "^4.2.3",
+    "autoprefixer": "^10.4.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
 }
-

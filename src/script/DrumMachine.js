@@ -12,10 +12,10 @@ export default class DrumMachineApp extends React.Component{
     }
 
     clickCallback(event){
-        event.target.classList.add('clickPress')
+        event.target.classList.add('drumPad_clickHover')
         const audioID = event.target.textContent
         document.getElementById(audioID).play()
-        setTimeout(()=>event.target.classList.remove('clickPress'), 200)
+        setTimeout(()=>event.target.classList.remove('drumPad_clickHover'), 200)
         this.setState(()=>{
             return {
                 lastPressedButton: event.target.id
@@ -24,11 +24,10 @@ export default class DrumMachineApp extends React.Component{
     }
 
     keydownCallback(event){
-        console.log('keydownCallback')
         const audio = document.getElementById(event.code.slice(-1))
-        audio.parentNode.classList.add('clickPress')    
+        audio.parentNode.classList.add('drumPad_clickHover')    
         audio.play()
-        setTimeout(()=>audio.parentNode.classList.remove('clickPress'), 200)
+        setTimeout(()=>audio.parentNode.classList.remove('drumPad_clickHover'), 200)
         this.setState(()=>{
             return {
                 lastPressedButton: audio.parentNode.id
@@ -52,22 +51,24 @@ export default class DrumMachineApp extends React.Component{
         ]
         let exportArr = []
         for(let i = 0; i <= 8; i++){
-            exportArr.push(<DrumPad 
-                id={padsID[i]}
-                url={soundsURL[i]}
-                name={padsName[i]}
-                class='drum-pad' 
-                key={`uniqKey_${i}`}
-                onClickFunc={this.clickCallback}
-                />)
+            exportArr.push(
+                <DrumPad 
+                    id={padsID[i]}
+                    url={soundsURL[i]}
+                    name={padsName[i]}
+                    class='drumPad drumPad_theme' 
+                    key={`uniqKey_${i}`}
+                    onClickFunc={this.clickCallback}
+                />
+            )
         }
         return exportArr
     }
 
     render(){
         return (
-            <div id="drum-machine" className="appContainer" tabIndex={0} onKeyDown={this.keydownCallback}>
-                <div id='display' className='display'>
+            <div id="drum-machine" className="appContainer appContainer_theme" tabIndex={0} onKeyDown={this.keydownCallback}>
+                <div id='display' className='display display_theme'>
                     <p>{this.state.lastPressedButton}</p>
                 </div>
                 <div className='drumPadsContainer'>
@@ -89,12 +90,12 @@ class DrumPad extends React.Component{
                 id={this.props.id} 
                 className={this.props.class}
                 onClick={this.props.onClickFunc}>
-                <audio 
-                    className='clip' 
-                    id={this.props.name} 
-                    src={this.props.url}
-                    preload='true'>
-                </audio>
+                    <audio 
+                        className='clip' 
+                        id={this.props.name} 
+                        src={this.props.url}
+                        preload='true'>
+                    </audio>
                 {this.props.name}
             </div>
         )
